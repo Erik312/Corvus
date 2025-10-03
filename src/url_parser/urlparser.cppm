@@ -1,7 +1,7 @@
 //
-// urlparser.cpp - A simple url parser 
+// urlparser.cppm - A simple url parser 
 // version 1.0
-// Written by Erik Ramos(erikram312@gmail.com)
+// Written by Erik Ramos(erik.ramos315@gmail.com)
 // 
 //
 module;

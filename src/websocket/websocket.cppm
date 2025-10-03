@@ -1,7 +1,7 @@
 //
-// websocket.h - A socket wrapper 
+// websocket.cppm - A socket wrapper 
 // version 1.0
-// Written by Erik Ramos(erikram312@gmail.com)
+// Written by Erik Ramos(erik.ramos315@gmail.com)
 // 
 //
 
@@ -17,9 +17,9 @@ module;
 #include <unistd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-# include  "openssl/bio.h"
-# include  "openssl/ssl.h"
-# include  "openssl/err.h"
+#include "openssl/bio.h"
+#include "openssl/ssl.h"
+#include "openssl/err.h"
 
 
 export module websocket;
