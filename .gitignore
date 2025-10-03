@@ -1,0 +1,97 @@
+
+##### MacOS
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+
+
+
+# Log Files
+*.log
+
+
+
+##### Backup
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+
+
+##### Notepad++
+# Notepad++ backups #
+*.bak
+
+
+##### VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.so.*
+*.dll
+*.dylib
+*.obj
+
+
+
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.
+
+# C/C++ binary extension file
+*.bin
+gcm.cache
+
+
+# External libs and Headersa
+src/lib/
+src/includes/
+*.ini
+
+
