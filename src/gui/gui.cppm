@@ -13,12 +13,12 @@ module;
 //#include <GLFW/glfw3.h> // Will drag system OpenGL headers
 #include <GLFW/glfw3.h>
 
-export module spartan_gui;
+export module gui;
 
-export class SpartanGui{
+export class Gui{
     public:
-        SpartanGui(){};
-        ~SpartanGui(){};
+        Gui(){};
+        ~Gui(){};
         void renderScreen(std::string &browserData){
             glfwInit();
             glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -26,7 +26,7 @@ export class SpartanGui{
             glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
             glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-            GLFWwindow* window = glfwCreateWindow(1280, 1024, " S P A R T A N ", NULL, NULL);
+            GLFWwindow* window = glfwCreateWindow(1280, 1024, " C O R V U S", NULL, NULL);
 
             glfwMakeContextCurrent(window);
 

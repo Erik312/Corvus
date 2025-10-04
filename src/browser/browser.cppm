@@ -11,7 +11,7 @@ export module browser;
 import urlparser;
 import websocket;
 import webparser;
-import spartan_gui;
+import gui;
 
 // MainBrowser - MainBrowser is a Class used as the main browser interface. 
 
@@ -65,9 +65,9 @@ std::string getText(){
 };
 
 void renderText(std::string renderData){
-    std::cout << "------------------------------" << " Spartan " << "------------------------------" << "\n";
+    std::cout << "------------------------------" << " Corvus " << "------------------------------" << "\n";
     std::cout << renderData;
-    SpartanGui browserGui;
+    Gui browserGui;
     browserGui.renderScreen(renderData);
     return;
 };
