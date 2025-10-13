@@ -1,13 +1,13 @@
 CC=g++
 CXXFLAGS=-std=c++23 -Wall -Werror
 
-all: spartan
+all: corvus
 
-spartan: spartan_gui.o webparser.o websocket.o urlparser.o browser.o spartan.o  
-	${CC} ${CXXFLAGS} spartan_gui.o webparser.o websocket.o urlparser.o browser.o spartan.o -o spartan -lcrypto -lssl -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl src/lib/libimgui.a
+corvus: gui.o webparser.o websocket.o urlparser.o browser.o corvus.o  
+	${CC} ${CXXFLAGS} gui.o webparser.o websocket.o urlparser.o browser.o corvus.o -o corvus -lcrypto -lssl -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl src/lib/libimgui.a
 
-spartan.o: src/spartan.cpp
-	${CC} ${CXXFLAGS} -fmodules-ts -c src/spartan.cpp
+corvus.o: src/corvus.cpp
+	${CC} ${CXXFLAGS} -fmodules-ts -c src/corvus.cpp
 
 browser.o: src/browser/browser.cppm
 	${CC} ${CXXFLAGS} -fmodules-ts -c src/browser/browser.cppm
@@ -21,10 +21,9 @@ websocket.o: src/websocket/websocket.cppm
 webparser.o: src/webparser/webparser.cppm
 	${CC} ${CXXFLAGS} -fmodules-ts -c src/webparser/webparser.cppm
 
-spartan_gui.o: src/gui/spartan_gui.cppm
-	${CC} ${CXXFLAGS} -fmodules-ts -c src/gui/spartan_gui.cppm
-
+gui.o: src/gui/gui.cppm
+	${CC} ${CXXFLAGS} -fmodules-ts -c src/gui/gui.cppm
 
 
 clean:
-	rm *.o spartan
+	rm *.o corvus
