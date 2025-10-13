@@ -89,7 +89,7 @@ Temporary Items
 gcm.cache
 
 
-# External libs and Headersa
+# External libs and Headers
 src/lib/
 src/includes/
 *.ini
