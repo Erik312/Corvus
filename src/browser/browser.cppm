@@ -34,6 +34,9 @@ public:
     if(m_parser.parse_url(webMap,m_web) != 0){
         return -1;
     }
+    if(webMap["Path"] == " " || webMap["Path"] == ""){
+        webMap["Path"]="/";
+    }
     if(webMap["Scheme"][4] == 's'){
         std::cout << "using https" << "\n";
         if(m_socket.getHttps(webMap,m_data) !=0){
