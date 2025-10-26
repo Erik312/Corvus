@@ -17,6 +17,7 @@ module;
 #include <unistd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <vector>
 #include "openssl/bio.h"
 #include "openssl/ssl.h"
 #include "openssl/err.h"
@@ -34,11 +35,11 @@ public:
     // Gets requested website,connects and communicates.Takes a map of strings as url and a string as a buffer.
     // parameter: std::map<string,string> myMap, string &dataBuffer.
     // returns 0 on success.
-    int getHttp(std::map<std::string,std::string> myMap,std::string &dataBuffer){
+    int getHttp(std::map<std::string,std::string> myMap,std::vector<std::string> &dataBuffer){
         std::map<std::string,std::string> tempMap=myMap;
         int sockfd; // main socket object
         char buff[1024];
-        std::string recvBuffer;
+        std::vector<std::string> recvBuffer;
         struct addrinfo hints, *servinfo, *p;
         std::string tempHost=tempMap["Hostname"];
         std::string tempPath=tempMap["Path"];
@@ -97,7 +98,7 @@ public:
                 std::cout << "An error has occured" << "\n";
                 return -1;
             }
-            recvBuffer+=buff; // append buff data to recvBuffer string.
+            recvBuffer.push_back(buff); // append buff data to recvBuffer string.
             continue;
         }
         dataBuffer=recvBuffer;
@@ -108,7 +109,7 @@ public:
     };
 
     //HTTPS Support
-    int getHttps(std::map<std::string,std::string> myMap,std::string &dataBuffer){
+    int getHttps(std::map<std::string,std::string> myMap,std::vector<std::string> &dataBuffer){
         std::map<std::string,std::string> tempMap=myMap;
         int sockfd; // main socket object
         SSL *ssl; // main ssl object
@@ -118,7 +119,7 @@ public:
         SSL_load_error_strings();
         ssl=SSL_new(ctx);// set ssl config using (ctx);
         char buff[1024];
-        std::string recvBuffer;
+        std::vector<std::string> recvBuffer;
         struct addrinfo hints, *servinfo, *p;
         std::string tempHost=tempMap["Hostname"];
         std::string tempPath=tempMap["Path"];
@@ -193,7 +194,7 @@ public:
                 std::cout << "An error has occured while receiving data" << "\n";
                 return -1;
             }
-            recvBuffer+=buff; // append buff data to recvBuffer string.
+            recvBuffer.push_back(buff); // append buff data to recvBuffer string.
             continue;
         }
         dataBuffer=recvBuffer;
