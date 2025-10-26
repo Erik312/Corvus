@@ -16,4 +16,4 @@ WORKDIR /Corvus
 RUN make
 ENV XDG_RUNTIME_DIR=/tmp
 ENTRYPOINT ["./corvus"]
-CMD ["http://www.google.com"]
+CMD ["http://www.example.org"]
