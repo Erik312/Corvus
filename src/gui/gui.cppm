@@ -6,6 +6,7 @@ module;
 #include "../includes/IMGUI/imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <string>
+#include <vector>
 #define GL_SILENCE_DEPRECATION
 //#if defined(IMGUI_IMPL_OPENGL_ES2)
 //#include <GLES2/gl2.h>
@@ -19,7 +20,7 @@ export class Gui{
     public:
         Gui(){};
         ~Gui(){};
-        void renderScreen(std::string &browserData){
+        void renderScreen(std::vector<std::string> &browserData){
             glfwInit();
             glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -61,7 +62,7 @@ export class Gui{
                 // render your GUI
                 ImGui::Begin("demo",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
                 char userInputBuffer[]="";
-                std::string testData=browserData;
+                std::vector<std::string> testData=browserData;
                 ImGui::Spacing();
                 ImGui::Spacing();
                 ImGui::Spacing();
@@ -80,7 +81,10 @@ export class Gui{
                 ImGui::Spacing();
                 ImGui::Spacing();
                 ImGui::Spacing();
-                ImGui::TextUnformatted(testData.c_str(),NULL);
+                for(const std::string &x:testData){
+                   ImGui::TextUnformatted(x.c_str(),NULL); 
+                }
+                
                 ImGui::End();
 
                 // Render dear imgui into screen
