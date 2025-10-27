@@ -4,7 +4,7 @@ CXXFLAGS=-std=c++23 -Wall -Werror
 all: corvus
 
 corvus: gui.o webparser.o websocket.o urlparser.o browser.o corvus.o  
-	${CC} ${CXXFLAGS} gui.o webparser.o websocket.o urlparser.o browser.o corvus.o -o corvus -lcrypto -lssl -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl src/lib/libimgui.a
+	${CC} ${CXXFLAGS} gui.o webparser.o websocket.o urlparser.o browser.o corvus.o -o corvus -lcrypto -lssl -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl lib/libimgui.a
 
 corvus.o: src/corvus.cpp
 	${CC} ${CXXFLAGS} -fmodules-ts -c src/corvus.cpp
