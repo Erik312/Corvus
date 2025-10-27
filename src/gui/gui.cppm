@@ -1,9 +1,9 @@
 module;
 
 
-#include "../includes/IMGUI/imgui.h"
-#include "../includes/IMGUI/imgui_impl_glfw.h"
-#include "../includes/IMGUI/imgui_impl_opengl3.h"
+#include "../../includes/IMGUI/imgui.h"
+#include "../../includes/IMGUI/imgui_impl_glfw.h"
+#include "../../includes/IMGUI/imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <string>
 #include <vector>

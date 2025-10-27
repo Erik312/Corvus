@@ -90,6 +90,8 @@ gcm.cache
 
 
 # External libs and Headers
+lib/
+includes/
 src/lib/
 src/includes/
 *.ini
