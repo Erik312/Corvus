@@ -20,7 +20,7 @@ export class MainBrowser
 {
 public:
     std::string m_web;
-    std::vector<std::string> m_data;
+    std::string m_data;
     UrlParser m_parser;
     WebSocket m_socket;
     WebParser m_htmlparse;
@@ -55,20 +55,20 @@ public:
     return 0;
 };
 
-std::vector<std::string> getText(){
+std::string getText(){
     
     int styleFind=m_htmlparse.wordFind("</style>",m_data); // locates and indexes closing style tag
-    std::vector<std::string> resultHtml;
+    std::string resultHtml;
     if(styleFind == -1){
         resultHtml=m_htmlparse.parseWeb(m_data); // closing tag not found parse raw
     }else{
-        std::vector<std::string> extractedHtml=m_htmlparse.extractStyle(styleFind,m_data); // remove style tag and contents from data
+        std::string extractedHtml=m_htmlparse.extractStyle(styleFind,m_data); // remove style tag and contents from data
         resultHtml=m_htmlparse.parseWeb(extractedHtml); // parse text inside body tag
     }
     return resultHtml;
 };
 
-void renderText(std::vector<std::string> &renderData){
+void renderText(std::string &renderData){
     std::cout << "------------------------------" << " Corvus " << "------------------------------" << "\n";
     for(auto x:renderData){
         std::cout << x;
@@ -81,7 +81,7 @@ void renderText(std::vector<std::string> &renderData){
 void run(){
     std::cout << "This browser is now running" << "\n";
     this->getWeb();
-    std::vector<std::string> mainData=this->getText();
+    std::string mainData=this->getText();
     this->renderText(mainData);
     return;
 };
