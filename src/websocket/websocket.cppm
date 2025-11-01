@@ -98,7 +98,7 @@ public:
                 std::cout << "An error has occured" << "\n";
                 return -1;
             }
-            recvBuffer+=buff; // append buff data to recvBuffer string.
+            recvBuffer+=buff;// append buff data to recvBuffer string.
             continue;
         }
         dataBuffer=recvBuffer;
