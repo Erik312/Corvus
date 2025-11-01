@@ -60,14 +60,19 @@ export class WebParser{
                 inTag=true;
             }else if(tempRaw[i] == '>'){
                 inTag=false;
+                parsedData+='\n';
             }else{
                 if(inTag==false){
                     //std::string currentData;
                     parsedData+=tempRaw[i];
+                    
                     // if not inside tag append to string.
+                    
                 }
+                
                     
             }
+        
         }
             
             return parsedData; // returned text inside html tags.
