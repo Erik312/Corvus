@@ -83,6 +83,7 @@ Temporary Items
 *.out
 *.app
 *.
+corvus
 
 # C/C++ binary extension file
 *.bin
