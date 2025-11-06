@@ -8,6 +8,8 @@ Download the source files
 
 Install any necessary system dependencies. Reference the dockerfile for the dependencies needed.
 
+**You will need GCC-15 or newer**
+
 **Corvus uses ImGui as a static library for the gui system.** You will need to grab the source files, compile and create an archive.
 
 ## Building
