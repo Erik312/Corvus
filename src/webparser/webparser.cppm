@@ -42,39 +42,35 @@ export class WebParser{
         };
 
         std::string extractStyle(int targetIndex,std::string &dataFile){
-        std::string result;
-        int targetCount=targetIndex + 8;// start at end of style tag.
-        for(unsigned long i=targetCount; i < dataFile.size(); i++){
-            result+=dataFile[i]; // loop and append everything after the style tag
-        }
+            std::string result;
+            int targetCount=targetIndex + 8;// start at end of style tag.
+            for(unsigned long i=targetCount; i < dataFile.size(); i++){
+                result+=dataFile[i]; // loop and append everything after the style tag
+            }
             return result;
         };
 
 
         std::string parseWeb(std::string &rawHtml){
-        std::string tempRaw=rawHtml;
-        std::string parsedData;
-        bool inTag=false;
-        for(unsigned long i=0; i < tempRaw.size(); i++){ // loop through string searching for html tags.
-            if(tempRaw[i] == '<'){
-                inTag=true;
-            }else if(tempRaw[i] == '>'){
-                inTag=false;
-                parsedData+='\n';
-            }else{
-                if(inTag==false){
+            std::string tempRaw=rawHtml;
+            std::string parsedData;
+            bool inTag=false;
+            for(unsigned long i=0; i < tempRaw.size(); i++){ // loop through string searching for html tags.
+                if(tempRaw[i] == '<'){
+                    inTag=true;
+                }else if(tempRaw[i] == '>'){
+                    inTag=false;
+                    parsedData+='\n';
+                }else{
+                    if(inTag==false){
                     //std::string currentData;
-                    parsedData+=tempRaw[i];
+                        parsedData+=tempRaw[i];
                     
                     // if not inside tag append to string.
                     
+                    }    
                 }
-                
-                    
             }
-        
-        }
-            
             return parsedData; // returned text inside html tags.
         };
 
