@@ -5,8 +5,8 @@
 // 
 //
 
-
 module;
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -54,25 +54,31 @@ export class WebParser{
         std::string parseWeb(std::string &rawHtml){
             std::string tempRaw=rawHtml;
             std::string parsedData;
+            int endWord=wordFind("</body>",tempRaw);
+            size_t convWord=endWord;
             bool inTag=false;
-            for(unsigned long i=0; i < tempRaw.size(); i++){ // loop through string searching for html tags.
-                if(tempRaw[i] == '<'){
-                    inTag=true;
-                }else if(tempRaw[i] == '>'){
-                    inTag=false;
-                    parsedData+='\n';
+            for(size_t i=0; i < tempRaw.size(); i++){ // loop through string searching for html tags.
+                if(i == convWord){
+                    return parsedData;
                 }else{
-                    if(inTag==false){
-                    //std::string currentData;
-                        parsedData+=tempRaw[i];
-                    
-                    // if not inside tag append to string.
-                    
-                    }    
+                    if(tempRaw[i] == '<'){
+                        inTag=true;
+                    }else if(tempRaw[i] == '>'){
+                        inTag=false;
+                        parsedData+='\n';
+                    }else{
+                        if(inTag==false){
+                            //std::string currentData;
+                            parsedData+=tempRaw[i];
+                            // if not inside tag append to string.       
+                        }    
+                    }
                 }
+                
             }
             return parsedData; // returned text inside html tags.
-        };
+        }
+                
 
 
 };
