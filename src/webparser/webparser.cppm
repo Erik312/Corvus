@@ -25,7 +25,7 @@ export class WebParser{
 
         int wordFind(std::string targetWord,std::string &dataFile){
             std::string foundWord="";
-            for(unsigned long i=0; i < dataFile.size(); i++){
+            for(size_t i=0; i < dataFile.size(); i++){
                 if(dataFile[i] == targetWord[0]){ // looks for first char that matches the first char of target word
                     int wordStart=i;
                     foundWord=dataFile[i];
@@ -44,7 +44,7 @@ export class WebParser{
         std::string extractStyle(int targetIndex,std::string &dataFile){
             std::string result;
             int targetCount=targetIndex + 8;// start at end of style tag.
-            for(unsigned long i=targetCount; i < dataFile.size(); i++){
+            for(size_t i=targetCount; i < dataFile.size(); i++){
                 result+=dataFile[i]; // loop and append everything after the style tag
             }
             return result;
