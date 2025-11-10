@@ -35,6 +35,7 @@ public:
     if(m_parser.parse_url(webMap,m_web) != 0){
         return -1;
     }
+ 
     if(webMap["Path"] == " " || webMap["Path"] == ""){
         webMap["Path"]="/";
     }
@@ -46,7 +47,6 @@ public:
 
     }else{
         std::cout << "using http" << "\n";
-        std::cout << webMap["Scheme"] << "\n";
         if(m_socket.getHttp(webMap,m_data) !=0){
         return -1;
         }
