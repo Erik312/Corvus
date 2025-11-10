@@ -45,36 +45,62 @@ public:
 
     std::string parse_hostname(std::string h1){
         int count=0;
-        std::string e_hostname;
+        std::string e_hostname="";
         std::string wrk_url=h1;
-        for(std::size_t i=0; i < wrk_url.size(); i++){
-            if(wrk_url[i] == '/'){
-                count+=1;
+        std::cout << wrk_url;
+        bool properReq=false;
+        for(size_t i=0; i < wrk_url.size(); i++){
+            if(wrk_url[i] == ':'){
+                properReq=true;
             }
-            if(count==2 && wrk_url[i] != '/'){
-                e_hostname+=wrk_url[i];
-            }else if(count==3){
-                break;
 
-            }
         }
+        if(properReq==false){
+            for(size_t i=0; i < wrk_url.size(); i++){
+                if(wrk_url[i] == '/'){
+                    return e_hostname;
+                }
+                e_hostname+=wrk_url[i];
+            }
+            return e_hostname;
+        }else if(properReq==true){
+            for(std::size_t i=0; i < wrk_url.size(); i++){
+                if(wrk_url[i] == '/'){
+                count+=1;
+                }
+                if(count==2 && wrk_url[i] != '/'){
+                    e_hostname+=wrk_url[i];
+                }else if(count==3){
+                    break;
 
+                }
+            } 
+
+        }
+        
         return e_hostname;
+
     };
 
     std::string parse_scheme(std::string s1){
         int count=0;
         std::string e_scheme;
         std::string wrk_url=s1;
-        for(std::size_t i=0; i < wrk_url.size(); i++){
-            if(wrk_url[i] == '/'){
-                count+=1;
-            }
-            e_scheme+=wrk_url[i];
-            if(count >= 2){
-                break;
+        if(s1[4] != ':' || s1[5] != ':'){
+            e_scheme="http://";
+            return e_scheme;
+        }else{
+            for(std::size_t i=0; i < wrk_url.size(); i++){
+                if(wrk_url[i] == '/'){
+                    count+=1;
+                }
+                e_scheme+=wrk_url[i];
+                if(count >= 2){
+                    break;
+                }
             }
         }
+        
     
         return e_scheme;
 
