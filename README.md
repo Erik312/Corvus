@@ -18,6 +18,9 @@ Corvus uses make as a build system.
 Create a libs and includes folder in the project directory.
 
 Place ImGui ar lib in the libs folder and neccesary headers in the includes folder.
+
+Use the make command.
+
 ```
 
 make
@@ -26,6 +29,9 @@ make
 
 ## Usage
 Corvus currently only supports http/1.0 and https/1.0
+
+Run the exectubale
+
 ```
 
 ./corvus http://example.org/
