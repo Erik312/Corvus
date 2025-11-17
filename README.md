@@ -6,9 +6,9 @@ Corvus is a minimal dependency text based web browser built mostly from scratch 
 
 Download the source files
 
-Install any necessary system dependencies. Reference the dockerfile for the dependencies needed.
+Install any necessary system dependencies. Reference the dockerfile for the dependencies needed. Note: dockerfile is based on (Arch linux)
 
-**You will need GCC-15 or newer**
+**Corvus uses C++ modules. You will need GCC-15 or newer**
 
 **Corvus uses ImGui as a static library for the gui system.** You will need to grab the source files, compile and create an archive.
 
