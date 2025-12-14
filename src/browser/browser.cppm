@@ -1,9 +1,18 @@
 module;
 
+#include "../../includes/IMGUI/imgui.h"
+#include "../../includes/IMGUI/imgui_impl_glfw.h"
+#include "../../includes/IMGUI/imgui_impl_opengl3.h"
 #include <iostream>
 #include <string>
 #include <map>
 #include <vector>
+#include <stdio.h>
+
+#define GL_SILENCE_DEPRECATION
+
+#include <GLFW/glfw3.h>
+
 
 
 
@@ -21,38 +30,39 @@ export class MainBrowser
 public:
     std::string m_web;
     std::string m_data;
+    std::string m_formattedData;
     UrlParser m_parser;
     WebSocket m_socket;
     WebParser m_htmlparse;
-    MainBrowser(std::string webSite){
-        m_web=webSite;
+    MainBrowser(){ //std::string webSite
+
 
     };
     ~MainBrowser(){};
 
     int getWeb(){
-    std::map<std::string,std::string> webMap;
-    if(m_parser.parse_url(webMap,m_web) != 0){
-        return -1;
-    }
- 
-    if(webMap["Path"] == " " || webMap["Path"] == ""){
-        webMap["Path"]="/";
-    }
-    if(webMap["Scheme"][4] == 's'){
-        std::cout << "using https" << "\n";
-        if(m_socket.getHttps(webMap,m_data) !=0){
-        return -1;
-    }
-
-    }else{
-        std::cout << "using http" << "\n";
-        if(m_socket.getHttp(webMap,m_data) !=0){
-        return -1;
+        std::map<std::string,std::string> webMap;
+        if(m_parser.parse_url(webMap,m_web) != 0){
+            return -1;
         }
-    }
+ 
+        if(webMap["Path"] == " " || webMap["Path"] == ""){
+            webMap["Path"]="/";
+        }
+        if(webMap["Scheme"][4] == 's'){
+            std::cout << "using https" << "\n";
+            if(m_socket.getHttps(webMap,m_data) !=0){
+            return -1;
+        }
+
+        }else{
+            std::cout << "using http" << "\n";
+            if(m_socket.getHttp(webMap,m_data) !=0){
+            return -1;
+            }
+        }
     
-    return 0;
+        return 0;
 };
 
 std::string getText(){
@@ -68,26 +78,119 @@ std::string getText(){
     return resultHtml;
 };
 
-void renderText(std::string &renderData){
+void renderText(){
     std::cout << "------------------------------" << " Corvus " << "------------------------------" << "\n";
-    for(auto x:renderData){
+    for(auto x:m_formattedData){
         std::cout << x;
     }
-    Gui browserGui;
-    browserGui.renderScreen(renderData);
+    //Gui browserGui;
+    //browserGui.renderScreen(renderData);
+
+    glfwInit();
+    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    GLFWwindow* window = glfwCreateWindow(1280, 1024, " C O R V U S", NULL, NULL);
+    glfwMakeContextCurrent(window);
+
+            // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+            //ImGuiIO &io = ImGui::GetIO(); 
+            // Setup Platform/Renderer bindings
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 150");
+            // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+
+    std::string testData="CORVUS WEB BROWSER";
+    int myCounter=0;
+
+    while (!glfwWindowShouldClose(window))
+    {
+        myCounter++;
+        glfwPollEvents();
+        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+
+
+                // feed inputs to dear imgui, start new frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport->Pos); 
+        ImGui::SetNextWindowSize(viewport->Size);
+            
+
+                // render your GUI
+        ImGui::Begin("demo",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
+        char userInputBuffer[128]="";
+        //std::string testData="CORVUS WEB BROWSER";
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Button("back", ImVec2{100,20});
+        ImGui::SameLine();
+        ImGui::Button("forward", ImVec2{100,20});
+        ImGui::SameLine();
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() - 340);
+        ImGui::InputText("##",userInputBuffer,sizeof(userInputBuffer),ImGuiInputTextFlags_EnterReturnsTrue);
+        ImGui::SameLine();
+        ImGui::Button("refresh", ImVec2{100,20});
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::TextUnformatted(testData.c_str(),NULL);
+
+        
+        if(ImGui::IsKeyPressed(ImGuiKey_Enter)){
+            if(userInputBuffer[0] != '\0'){
+                m_web=userInputBuffer;
+                this->getWeb();
+                std::string mainData=this->getText();
+                m_formattedData=mainData;
+
+                testData=m_formattedData;
+                userInputBuffer[0]='\0';
+
+            }
+        }
+                
+        ImGui::End();
+        
+                // Render dear imgui into screen
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        int display_w, display_h;
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glfwSwapBuffers(window);
+    }
+
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     return;
 };
 
 void run(){
     std::cout << "This browser is now running" << "\n";
-    this->getWeb();
-    std::string mainData=this->getText();
-    this->renderText(mainData);
+    //this->getWeb();
+    //std::string mainData=this->getText();
+    this->renderText();
     return;
 };
 
 };
-
-
-
 

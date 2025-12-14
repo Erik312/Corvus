@@ -20,7 +20,7 @@ export class Gui{
     public:
         Gui(){};
         ~Gui(){};
-        void renderScreen(std::string &browserData){
+        void renderScreen(){ //std::string &browserData
             glfwInit();
             glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -62,7 +62,7 @@ export class Gui{
                 // render your GUI
                 ImGui::Begin("demo",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
                 char userInputBuffer[]="";
-                std::string testData=browserData;
+                //std::string testData=browserData;
                 ImGui::Spacing();
                 ImGui::Spacing();
                 ImGui::Spacing();
@@ -81,7 +81,7 @@ export class Gui{
                 ImGui::Spacing();
                 ImGui::Spacing();
                 ImGui::Spacing();
-                ImGui::TextUnformatted(testData.c_str(),NULL);
+                //ImGui::TextUnformatted(testData.c_str(),NULL);
                 
                 ImGui::End();
 
