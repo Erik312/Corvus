@@ -34,10 +34,8 @@ public:
     UrlParser m_parser;
     WebSocket m_socket;
     WebParser m_htmlparse;
-    MainBrowser(){ //std::string webSite
 
-
-    };
+    MainBrowser(){};
     ~MainBrowser(){};
 
     int getWeb(){
@@ -79,13 +77,6 @@ std::string getText(){
 };
 
 void renderText(){
-    std::cout << "------------------------------" << " Corvus " << "------------------------------" << "\n";
-    for(auto x:m_formattedData){
-        std::cout << x;
-    }
-    //Gui browserGui;
-    //browserGui.renderScreen(renderData);
-
     glfwInit();
     glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -95,29 +86,27 @@ void renderText(){
     GLFWwindow* window = glfwCreateWindow(1280, 1024, " C O R V U S", NULL, NULL);
     glfwMakeContextCurrent(window);
 
-            // Setup Dear ImGui context
+    // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-            //ImGuiIO &io = ImGui::GetIO(); 
-            // Setup Platform/Renderer bindings
+    //ImGuiIO &io = ImGui::GetIO(); 
+    // Setup Platform/Renderer bindings
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 150");
-            // Setup Dear ImGui style
+    // Setup Dear ImGui style
     ImGui::StyleColorsDark();
 
-    std::string testData="CORVUS WEB BROWSER";
-    int myCounter=0;
+    std::string screenData="CORVUS WEB BROWSER";
 
     while (!glfwWindowShouldClose(window))
     {
-        myCounter++;
         glfwPollEvents();
         glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
 
 
 
-                // feed inputs to dear imgui, start new frame
+        // feed inputs to dear imgui, start new frame
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -127,10 +116,9 @@ void renderText(){
         ImGui::SetNextWindowSize(viewport->Size);
             
 
-                // render your GUI
+        // render your GUI
         ImGui::Begin("demo",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
         char userInputBuffer[128]="";
-        //std::string testData="CORVUS WEB BROWSER";
         ImGui::Spacing();
         ImGui::Spacing();
         ImGui::Spacing();
@@ -149,7 +137,7 @@ void renderText(){
         ImGui::Spacing();
         ImGui::Spacing();
         ImGui::Spacing();
-        ImGui::TextUnformatted(testData.c_str(),NULL);
+        ImGui::TextUnformatted(screenData.c_str(),NULL);
 
         
         if(ImGui::IsKeyPressed(ImGuiKey_Enter)){
@@ -158,8 +146,7 @@ void renderText(){
                 this->getWeb();
                 std::string mainData=this->getText();
                 m_formattedData=mainData;
-
-                testData=m_formattedData;
+                screenData=m_formattedData;
                 userInputBuffer[0]='\0';
 
             }
@@ -167,7 +154,7 @@ void renderText(){
                 
         ImGui::End();
         
-                // Render dear imgui into screen
+        // Render dear imgui into screen
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -185,9 +172,6 @@ void renderText(){
 };
 
 void run(){
-    std::cout << "This browser is now running" << "\n";
-    //this->getWeb();
-    //std::string mainData=this->getText();
     this->renderText();
     return;
 };
