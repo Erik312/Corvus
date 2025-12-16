@@ -34,6 +34,6 @@ Run the exectubale
 
 ```
 
-./corvus http://example.org/
+./corvus
 
 ```
