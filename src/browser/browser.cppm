@@ -129,7 +129,14 @@ void renderText(){
         ImGui::PushItemWidth(ImGui::GetWindowWidth() - 340);
         ImGui::InputText("##",userInputBuffer,sizeof(userInputBuffer),ImGuiInputTextFlags_EnterReturnsTrue);
         ImGui::SameLine();
-        ImGui::Button("refresh", ImVec2{100,20});
+
+        if(ImGui::Button("refresh", ImVec2{100,20})){
+            this->getWeb();
+            std::string mainData=this->getText();
+            m_formattedData=mainData;
+            screenData=m_formattedData;
+        }
+
         ImGui::Spacing();
         ImGui::Spacing();
         ImGui::Spacing();
