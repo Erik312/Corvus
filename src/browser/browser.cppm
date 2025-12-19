@@ -31,7 +31,7 @@ public:
     std::string m_web;
     std::string m_data;
     std::string m_formattedData;
-    std::vector<std::string> m_sessionHistory;
+    std::vector<std::string> m_history;
     UrlParser m_parser;
     WebSocket m_socket;
     WebParser m_htmlparse;
@@ -152,7 +152,7 @@ void renderText(){
             if(userInputBuffer[0] != '\0'){
                 m_web=userInputBuffer;
                 this->getWeb();
-                m_sessionHistory.push_back(m_web);
+                m_history.push_back(m_web);
                 std::string mainData=this->getText();
                 m_formattedData=mainData;
                 screenData=m_formattedData;
