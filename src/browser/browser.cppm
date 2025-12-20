@@ -28,6 +28,7 @@ import gui;
 export class MainBrowser
 {
 public:
+    int m_currentPosition;
     std::string m_web;
     std::string m_data;
     std::string m_formattedData;
@@ -153,6 +154,7 @@ void renderText(){
                 m_web=userInputBuffer;
                 this->getWeb();
                 m_sessionHistory.push_back(m_web);
+                m_currentPosition=m_sessionHistory.size() - 1;
                 std::string mainData=this->getText();
                 m_formattedData=mainData;
                 screenData=m_formattedData;
