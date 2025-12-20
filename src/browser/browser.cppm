@@ -28,7 +28,7 @@ import gui;
 export class MainBrowser
 {
 public:
-    int m_currentPosition;
+    int m_currentPosition=0;
     std::string m_web;
     std::string m_data;
     std::string m_formattedData;
