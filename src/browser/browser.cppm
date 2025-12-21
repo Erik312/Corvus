@@ -124,7 +124,20 @@ void renderText(){
         ImGui::Spacing();
         ImGui::Spacing();
         ImGui::Spacing();
-        ImGui::Button("back", ImVec2{100,20});
+
+        if(ImGui::Button("back", ImVec2{100,20})){
+            if(m_currentPosition != 0){
+                m_currentPosition=m_currentPosition - 1;
+                std::string backUrl=m_sessionHistory[m_currentPosition];
+                m_web=backUrl;
+                this->getWeb();
+                std::string backData=this->getText();
+                m_formattedData=backData;
+                screenData=m_formattedData;
+            }
+           
+        }
+
         ImGui::SameLine();
         ImGui::Button("forward", ImVec2{100,20});
         ImGui::SameLine();
