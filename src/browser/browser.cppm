@@ -141,7 +141,7 @@ void renderText(){
         ImGui::SameLine();
 
         if(ImGui::Button("forward", ImVec2{100,20})){
-            if(m_currentPosition != static_cast<int>(m_sessionHistory.size())){
+            if(m_currentPosition != static_cast<int>(m_sessionHistory.size() - 1)){
                 m_currentPosition=m_currentPosition + 1;
                 std::string forwardUrl=m_sessionHistory[m_currentPosition];
                 m_web=forwardUrl;
