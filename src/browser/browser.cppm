@@ -139,7 +139,19 @@ void renderText(){
         }
 
         ImGui::SameLine();
-        ImGui::Button("forward", ImVec2{100,20});
+
+        if(ImGui::Button("forward", ImVec2{100,20})){
+            if(m_currentPosition != static_cast<int>(m_sessionHistory.size())){
+                m_currentPosition=m_currentPosition + 1;
+                std::string forwardUrl=m_sessionHistory[m_currentPosition];
+                m_web=forwardUrl;
+                this->getWeb();
+                std::string forwardData=this->getText();
+                m_formattedData=forwardData;
+                screenData=m_formattedData;
+            }
+        }
+
         ImGui::SameLine();
         ImGui::PushItemWidth(ImGui::GetWindowWidth() - 340);
         ImGui::InputText("##",userInputBuffer,sizeof(userInputBuffer),ImGuiInputTextFlags_EnterReturnsTrue);
