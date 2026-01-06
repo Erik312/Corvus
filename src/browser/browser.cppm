@@ -21,7 +21,6 @@ export module browser;
 import urlparser;
 import websocket;
 import webparser;
-import gui;
 
 // MainBrowser - MainBrowser is a Class used as the main browser interface. 
 
