@@ -44,6 +44,16 @@ public:
         if(m_parser.parse_url(webMap,m_web) != 0){
             return -1;
         }
+
+        if(webMap["Hostname"][0] != 'w' && webMap["Hostname"][3] != '.'){
+            std::string hostnameHolder=webMap["Hostname"];
+            std::cout << hostnameHolder;
+            std::string hostnameStarter="www.";
+            std::cout << hostnameStarter;
+            webMap["Hostname"]=hostnameStarter + hostnameHolder;
+            std::cout << webMap["Hostname"];
+
+        }
  
         if(webMap["Path"] == " " || webMap["Path"] == ""){
             webMap["Path"]="/";
