@@ -22,7 +22,7 @@ import urlparser;
 import websocket;
 import webparser;
 
-// MainBrowser - MainBrowser is a Class used as the main browser interface. 
+// MainBrowser - MainBrowser is a Class used as the main browser interface.
 
 export class MainBrowser
 {
@@ -47,14 +47,11 @@ public:
 
         if(webMap["Hostname"][0] != 'w' && webMap["Hostname"][3] != '.'){
             std::string hostnameHolder=webMap["Hostname"];
-            std::cout << hostnameHolder;
             std::string hostnameStarter="www.";
-            std::cout << hostnameStarter;
             webMap["Hostname"]=hostnameStarter + hostnameHolder;
-            std::cout << webMap["Hostname"];
 
         }
- 
+
         if(webMap["Path"] == " " || webMap["Path"] == ""){
             webMap["Path"]="/";
         }
@@ -70,12 +67,12 @@ public:
             return -1;
             }
         }
-    
+
         return 0;
 };
 
 std::string getText(){
-    
+
     int styleFind=m_htmlparse.wordFind("</style>",m_data); // locates and indexes closing style tag
     std::string resultHtml;
     if(styleFind == -1){
@@ -100,7 +97,7 @@ void renderText(){
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    //ImGuiIO &io = ImGui::GetIO(); 
+    //ImGuiIO &io = ImGui::GetIO();
     // Setup Platform/Renderer bindings
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 150");
@@ -123,9 +120,9 @@ void renderText(){
         ImGui::NewFrame();
 
         ImGuiViewport* viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(viewport->Pos); 
+        ImGui::SetNextWindowPos(viewport->Pos);
         ImGui::SetNextWindowSize(viewport->Size);
-            
+
 
         // render your GUI
         ImGui::Begin("demo",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
@@ -144,7 +141,7 @@ void renderText(){
                 m_formattedData=backData;
                 screenData=m_formattedData;
             }
-           
+
         }
 
         ImGui::SameLine();
@@ -182,7 +179,7 @@ void renderText(){
         ImGui::Spacing();
         ImGui::TextUnformatted(screenData.c_str(),NULL);
 
-        
+
         if(ImGui::IsKeyPressed(ImGuiKey_Enter)){
             if(userInputBuffer[0] != '\0'){
                 m_web=userInputBuffer;
@@ -196,9 +193,9 @@ void renderText(){
 
             }
         }
-                
+
         ImGui::End();
-        
+
         // Render dear imgui into screen
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -222,4 +219,3 @@ void run(){
 };
 
 };
-
