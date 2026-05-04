@@ -4,6 +4,7 @@ module;
 #include "../../includes/IMGUI/imgui_impl_glfw.h"
 #include "../../includes/IMGUI/imgui_impl_opengl3.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <map>
 #include <vector>
@@ -159,7 +160,7 @@ void renderText(){
         }
 
         ImGui::SameLine();
-        ImGui::PushItemWidth(ImGui::GetWindowWidth() - 340);
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() - 450);
         ImGui::InputText("##",userInputBuffer,sizeof(userInputBuffer),ImGuiInputTextFlags_EnterReturnsTrue);
         ImGui::SameLine();
 
@@ -169,6 +170,39 @@ void renderText(){
             m_formattedData=mainData;
             screenData=m_formattedData;
         }
+
+         ImGui::SameLine();
+
+        if(ImGui::Button("bookmark", ImVec2{100,20})){
+            std::string filename="bookmarks.txt";
+            std::string bkmark=m_web;
+            bool exists=false;
+            std::ofstream outFile(filename, std::ios::app);
+
+            std::ifstream inFile(filename);
+
+            if(inFile.is_open()){
+                std::string line;
+                while(std::getline(inFile, line)){
+                    if(line == bkmark){
+                        exists=true;
+                        break;
+                    }
+
+                }
+            }
+
+            
+
+            if(!exists){
+                outFile << bkmark << '\n';
+            }
+            inFile.close();
+            outFile.close();
+
+        }
+
+
 
         ImGui::Spacing();
         ImGui::Spacing();
