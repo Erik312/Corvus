@@ -98,3 +98,5 @@ src/includes/
 *.ini
 
 
+# Created text Files
+*.txt
