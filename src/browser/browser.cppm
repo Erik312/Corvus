@@ -126,7 +126,8 @@ void renderText(){
 
 
         // render your GUI
-        ImGui::Begin("demo",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
+        ImGui::Begin("main",NULL,ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoFocusOnAppearing |
+                    ImGuiWindowFlags_NoBringToFrontOnFocus);
         char userInputBuffer[128]="";
         ImGui::Spacing();
         ImGui::Spacing();
@@ -160,7 +161,7 @@ void renderText(){
         }
 
         ImGui::SameLine();
-        ImGui::PushItemWidth(ImGui::GetWindowWidth() - 450);
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() - 560);
         ImGui::InputText("##",userInputBuffer,sizeof(userInputBuffer),ImGuiInputTextFlags_EnterReturnsTrue);
         ImGui::SameLine();
 
@@ -201,6 +202,47 @@ void renderText(){
             outFile.close();
 
         }
+
+        ImGui::SameLine();
+
+        static bool showMenu=false;
+        if(ImGui::Button("=", ImVec2{100,20})){
+            showMenu=true;
+         
+
+        }
+
+        static bool showBookmarks=false;
+
+        if(showMenu){
+            ImGui::Begin("Menu", &showMenu, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+            if(ImGui::Button("Bookmarks")){
+                showBookmarks=true;
+            }
+            
+            ImGui::End();  
+        }
+
+        if(showBookmarks){
+            std::vector<std::string> bookmarks;
+            std::ifstream readFile("bookmarks.txt");
+            if(readFile.is_open()){
+                std::string line;
+                while(std::getline(readFile,line)){
+                    bookmarks.push_back(line);
+                }
+
+            }
+            readFile.close();
+
+            ImGui::Begin("Bookmarks", &showBookmarks, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+            for(auto x: bookmarks){
+                ImGui::Text("%s",x.c_str());
+            }
+            
+            ImGui::End();
+        }
+
 
 
 
