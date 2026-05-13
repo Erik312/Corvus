@@ -213,13 +213,18 @@ void renderText(){
         }
 
         static bool showBookmarks=false;
+        static bool showHistory=false;
 
         if(showMenu){
             ImGui::Begin("Menu", &showMenu, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+            ImGui::BeginGroup();
             if(ImGui::Button("Bookmarks")){
                 showBookmarks=true;
             }
-            
+            if(ImGui::Button("History")){
+                showHistory=true;
+            }
+            ImGui::EndGroup();
             ImGui::End();  
         }
 
@@ -240,6 +245,12 @@ void renderText(){
                 ImGui::Text("%s",x.c_str());
             }
             
+            ImGui::End();
+        }
+
+        if(showHistory){
+            ImGui::Begin("History", &showHistory, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+            ImGui::Text("History of sites");
             ImGui::End();
         }
 
