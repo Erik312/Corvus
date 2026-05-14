@@ -243,6 +243,8 @@ void renderText(){
             ImGui::Begin("Bookmarks", &showBookmarks, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
             for(auto x: bookmarks){
                 ImGui::Text("%s",x.c_str());
+                ImGui::Button("delete");
+
             }
             
             ImGui::End();
